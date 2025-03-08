@@ -1,6 +1,6 @@
 import '../App.css';
 
-function CreateAndEditComponent({
+function CreateComponent({
     onClose,
     onSave
 }) {
@@ -114,4 +114,4 @@ function CreateAndEditComponent({
     )
 }
 
-export default CreateAndEditComponent;
+export default CreateComponent;

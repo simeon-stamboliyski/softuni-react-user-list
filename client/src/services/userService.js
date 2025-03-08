@@ -31,5 +31,17 @@ export default {
         } else {
             return { ok: false, error: 'Failed to delete user' };
         }
+    },
+    async update(userData) {
+        const response = await fetch(`${baseUrl}/${userData._id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        });
+
+
+        return response;
     }
 }

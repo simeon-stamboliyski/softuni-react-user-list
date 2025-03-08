@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import UserListItem from './UserListItem';
 import userService from '../services/UserService.js';
 import '../App.css';
-import CreateAndEditComponent from './CreateAndEditComponent.jsx';
+import CreateComponent from './CreateComponent.jsx';
 
 function SectionComponent() {
     const [users, setUsers] = useState([]);
@@ -30,7 +30,6 @@ function SectionComponent() {
         const objectFormData = Object.fromEntries(formData);
 
         const reqResponse = await userService.create(objectFormData);
-        console.log(reqResponse);
 
         window.location.reload();
     }
@@ -75,7 +74,7 @@ function SectionComponent() {
                     </div>
                 </form>
 
-                {showCreate && <CreateAndEditComponent 
+                {showCreate && <CreateComponent 
                     onClose={closeAddUserClickHanlder}
                     onSave={saveUserClickHandler}
                 />}

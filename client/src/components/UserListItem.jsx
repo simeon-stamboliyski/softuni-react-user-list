@@ -4,11 +4,13 @@ import { useState } from 'react';
 import DeleteUserComponent from './DeleteUserComponent.jsx';
 import UserService from '../services/UserService.js';
 import UserDetailsComponent from './UserDetailsComponent.jsx';
+import EditComponent from './EditComponent.jsx';
 
 function UserListItem(props) {
     const [showDelete, setShowDelete] = useState(false);
-    const [selectedUser, setSelectedUser] = useState(null);
     const [showDetails, setShowDetails] = useState(false);
+    const [showEdit, setShowEdit] = useState(false);
+    const [selectedUser, setSelectedUser] = useState(null);
 
     const openDeleteUserClickHandler = () => {
         setShowDelete(true);
@@ -69,6 +71,40 @@ function UserListItem(props) {
         setSelectedUser(null);
     }
 
+    const openEditUserClickHandler = () => {
+        setShowEdit(true);
+        setSelectedUser({ _id: props._id, 
+                        firstName: props.firstName, 
+                        lastName: props.lastName, 
+                        email: props.email, 
+                        phoneNumber: props.phoneNumber, 
+                        createdAt: props.createdAt,
+                        updatedAt: props.updatedAt,
+                        country: props.country,
+                        city: props.city,
+                        street: props.street,
+                        streetNumber: props.streetNumber
+        });
+    }
+
+    const closeEditUserClickHandler = () => {
+        setShowEdit(false);
+        setSelectedUser(null);
+    }
+
+    const editUserClickHandler = async (updatedUser) => { 
+        const response = await UserService.update(updatedUser);
+
+        if (response.ok) {
+            console.log(`User ${selectedUser.firstName} ${selectedUser.lastName} updated.`);
+            setShowEdit(false);
+        } else {
+            console.error('Failed to update the user.');
+        }
+
+        window.location.reload();
+    }
+
     return (
         <>
             {showDelete && <DeleteUserComponent
@@ -78,6 +114,12 @@ function UserListItem(props) {
 
             {showDetails && <UserDetailsComponent 
                 onClose={closeDetailsUserClickHandler}
+                user={selectedUser}
+            />}
+
+            {showEdit && <EditComponent 
+                onClose={closeEditUserClickHandler}
+                onEdit={editUserClickHandler}
                 user={selectedUser}
             />}
 
@@ -93,7 +135,7 @@ function UserListItem(props) {
                 <td>{fromISODate(props.createdAt)}</td>
 
                 <td className="actions">
-                    <button className="btn edit-btn" title="Edit">
+                    <button className="btn edit-btn" title="Edit" onClick={openEditUserClickHandler}>
                     <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen-to-square"
                         className="svg-inline--fa fa-pen-to-square" role="img" xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 532 512">
