@@ -12,12 +12,6 @@ function Main() {
 
                 <SectionComponent />
 
-                <UserDetailsComponent />
-
-                <CreateAndEditComponent />
-
-                <DeleteUserComponent />
-
             </main>
         </>
     )

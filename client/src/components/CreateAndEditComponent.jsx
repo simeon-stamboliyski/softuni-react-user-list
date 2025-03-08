@@ -3,8 +3,8 @@ import '../App.css';
 function CreateAndEditComponent() {
     return (
         <>
-            {/* <!-- Create/Edit Form component  --> */}
-                {/* <!-- <div className="overlay">
+            {/* <!-- Create/Edit htmlForm component  --> */}
+            <div className="overlay">
                 <div className="backdrop"></div>
                 <div className="modal">
                     <div className="user-container">
@@ -20,16 +20,16 @@ function CreateAndEditComponent() {
                         </button>
                     </header>
                     <form>
-                        <div className="form-row">
-                        <div className="form-group">
-                            <label for="firstName">First name</label>
+                        <div className="htmlForm-row">
+                        <div className="htmlForm-group">
+                            <label htmlFor="firstName">First name</label>
                             <div className="input-wrapper">
                             <span><i className="fa-solid fa-user"></i></span>
                             <input id="firstName" name="firstName" type="text" />
                             </div>
                         </div>
-                        <div className="form-group">
-                            <label for="lastName">Last name</label>
+                        <div className="htmlForm-group">
+                            <label htmlFor="lastName">Last name</label>
                             <div className="input-wrapper">
                             <span><i className="fa-solid fa-user"></i></span>
                             <input id="lastName" name="lastName" type="text" />
@@ -37,16 +37,16 @@ function CreateAndEditComponent() {
                         </div>
                         </div>
 
-                        <div className="form-row">
-                        <div className="form-group">
-                            <label for="email">Email</label>
+                        <div className="htmlForm-row">
+                        <div className="htmlForm-group">
+                            <label htmlFor="email">Email</label>
                             <div className="input-wrapper">
                             <span><i className="fa-solid fa-envelope"></i></span>
                             <input id="email" name="email" type="text" />
                             </div>
                         </div>
-                        <div className="form-group">
-                            <label for="phoneNumber">Phone number</label>
+                        <div className="htmlForm-group">
+                            <label htmlFor="phoneNumber">Phone number</label>
                             <div className="input-wrapper">
                             <span><i className="fa-solid fa-phone"></i></span>
                             <input id="phoneNumber" name="phoneNumber" type="text" />
@@ -54,24 +54,24 @@ function CreateAndEditComponent() {
                         </div>
                         </div>
 
-                        <div className="form-group long-line">
-                        <label for="imageUrl">Image Url</label>
+                        <div className="htmlForm-group long-line">
+                        <label htmlFor="imageUrl">Image Url</label>
                         <div className="input-wrapper">
                             <span><i className="fa-solid fa-image"></i></span>
                             <input id="imageUrl" name="imageUrl" type="text" />
                         </div>
                         </div>
 
-                        <div className="form-row">
-                        <div className="form-group">
-                            <label for="country">Country</label>
+                        <div className="htmlForm-row">
+                        <div className="htmlForm-group">
+                            <label htmlFor="country">Country</label>
                             <div className="input-wrapper">
                             <span><i className="fa-solid fa-map"></i></span>
                             <input id="country" name="country" type="text" />
                             </div>
                         </div>
-                        <div className="form-group">
-                            <label for="city">City</label>
+                        <div className="htmlForm-group">
+                            <label htmlFor="city">City</label>
                             <div className="input-wrapper">
                             <span><i className="fa-solid fa-city"></i></span>
                             <input id="city" name="city" type="text" />
@@ -79,23 +79,23 @@ function CreateAndEditComponent() {
                         </div>
                         </div>
 
-                        <div className="form-row">
-                        <div className="form-group">
-                            <label for="street">Street</label>
+                        <div className="htmlForm-row">
+                        <div className="htmlForm-group">
+                            <label htmlFor="street">Street</label>
                             <div className="input-wrapper">
                             <span><i className="fa-solid fa-map"></i></span>
                             <input id="street" name="street" type="text" />
                             </div>
                         </div>
-                        <div className="form-group">
-                            <label for="streetNumber">Street number</label>
+                        <div className="htmlForm-group">
+                            <label htmlFor="streetNumber">Street number</label>
                             <div className="input-wrapper">
                             <span><i className="fa-solid fa-house-chimney"></i></span>
                             <input id="streetNumber" name="streetNumber" type="text" />
                             </div>
                         </div>
                         </div>
-                        <div id="form-actions">
+                        <div id="htmlForm-actions">
                         <button id="action-save" className="btn" type="submit">Save</button>
                         <button id="action-cancel" className="btn" type="button">
                             Cancel
@@ -104,7 +104,7 @@ function CreateAndEditComponent() {
                     </form>
                     </div>
                 </div>
-                </div> --> */}
+            </div>
         </>
     )
 }

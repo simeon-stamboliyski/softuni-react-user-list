@@ -1,15 +1,23 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import UserListItem from './UserListItem';
 import userService from '../services/UserService.js';
 import '../App.css';
+import CreateAndEditComponent from './CreateAndEditComponent.jsx';
 
 function SectionComponent() {
+    const [users, setUsers] = useState([]);
+    const [showCreate, setShowCreate] = useState(false);
+
     useEffect(() => {
         userService.getAll()
             .then(result => {
-                console.log(result);
+                setUsers(result);
             });
     }, []);
+
+    const addUserClickHandler = () => {
+        setShowCreate(true);
+    }
 
     return (
         <>
@@ -50,6 +58,8 @@ function SectionComponent() {
                     </select>
                     </div>
                 </form>
+
+                {showCreate && <CreateAndEditComponent />}
 
                 {/* <!-- Table component --> */}
                 <div className="table-wrapper">
@@ -179,19 +189,22 @@ function SectionComponent() {
                     </thead>
                     <tbody>
                         {/* <!-- Table row component --> */}
-                        <UserListItem />
+                        {users.map(user => <UserListItem 
+                        key={user._id} 
+                        {...user}
+                        />)}
                     </tbody>
                     </table>
                 </div>
 
                 {/* <!-- New user button  --> */}
-                <button className="btn-add btn">Add new user</button>
+                <button className="btn-add btn" onClick={addUserClickHandler}>Add new user</button>
 
                 {/* <!-- Pagination component  --> */}
                 <div className="pagination position">
                     <div className="limits">
                     <span>Items per page:</span>
-                    <select name="limit" className="limit" value="5">
+                    <select name="limit" className="limit" defaultValue="5">
                         <option value="5">5</option>
                         <option value="5">10</option>
                         <option value="5">15</option>
