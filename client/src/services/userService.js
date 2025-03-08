@@ -7,5 +7,29 @@ export default {
         const users = Object.values(result);
 
         return users;
+    },
+    async create(userData) {
+        const response = await fetch(baseUrl, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        });
+
+        const result = await response.json();
+
+        return result;
+    },
+    async delete(selectedUser) {
+        const response = await fetch(`${baseUrl}/${selectedUser._id}`, {
+            method: 'DELETE',
+        });
+        
+        if (response.ok) {
+            return { ok: true };
+        } else {
+            return { ok: false, error: 'Failed to delete user' };
+        }
     }
 }

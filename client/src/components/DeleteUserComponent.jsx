@@ -1,16 +1,16 @@
 import '../App.css';
 
-function DeleteUserComponent() {
+function DeleteUserComponent({ onClose, onDelete, user }) {
     return (
         <>
             {/* <!-- Delete user component  --> */}
-                {/* <!-- <div className="overlay">
+            <div className="overlay">
                 <div className="backdrop"></div>
                 <div className="modal">
                     <div className="confirm-container">
                     <header className="headers">
                         <h2>Are you sure you want to delete this account?</h2>
-                        <button className="btn close">
+                        <button className="btn close" onClick={onClose}>
                         <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark"
                             className="svg-inline--fa fa-xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                             <path fill="currentColor"
@@ -21,17 +21,17 @@ function DeleteUserComponent() {
                     </header>
                     <div className="actions">
                         <div id="form-actions">
-                        <button id="action-save" className="btn" type="submit">Delete</button>
-                        <button id="action-cancel" className="btn" type="button">
+                        <button id="action-save" className="btn" type="submit" onClick={onDelete}>Delete</button>
+                        <button id="action-cancel" className="btn" type="button" onClick={onClose}>
                             Cancel
                         </button>
                         </div>
                     </div>
                     </div>
                 </div>
-                </div> --> */}
+            </div>
         </>
     )
 }
 
-export default DeleteUserComponent;
+export default DeleteUserComponent; 

@@ -19,6 +19,22 @@ function SectionComponent() {
         setShowCreate(true);
     }
 
+    const closeAddUserClickHanlder = () => {
+        setShowCreate(false);
+    }
+
+    const saveUserClickHandler = async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+        const objectFormData = Object.fromEntries(formData);
+
+        const reqResponse = await userService.create(objectFormData);
+        console.log(reqResponse);
+
+        window.location.reload();
+    }
+
     return (
         <>
             {/* <!-- Section component  --> */}
@@ -59,7 +75,10 @@ function SectionComponent() {
                     </div>
                 </form>
 
-                {showCreate && <CreateAndEditComponent />}
+                {showCreate && <CreateAndEditComponent 
+                    onClose={closeAddUserClickHanlder}
+                    onSave={saveUserClickHandler}
+                />}
 
                 {/* <!-- Table component --> */}
                 <div className="table-wrapper">

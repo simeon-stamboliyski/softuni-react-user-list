@@ -1,9 +1,86 @@
 import '../App.css';
 import { fromISODate } from '../utils/dateTimeUtils';
+import { useState } from 'react';
+import DeleteUserComponent from './DeleteUserComponent.jsx';
+import UserService from '../services/UserService.js';
+import UserDetailsComponent from './UserDetailsComponent.jsx';
 
 function UserListItem(props) {
+    const [showDelete, setShowDelete] = useState(false);
+    const [selectedUser, setSelectedUser] = useState(null);
+    const [showDetails, setShowDetails] = useState(false);
+
+    const openDeleteUserClickHandler = () => {
+        setShowDelete(true);
+        setSelectedUser({ _id: props._id, 
+                        firstName: props.firstName, 
+                        lastName: props.lastName, 
+                        email: props.email, 
+                        phoneNumber: props.phoneNumber, 
+                        createdAt: props.createdAt,
+                        updatedAt: props.updatedAt,
+                        country: props.country,
+                        city: props.city,
+                        street: props.street,
+                        streetNumber: props.streetNumber
+        });
+    }
+
+    const closeDeleteUserClickHandler = () => {
+        setShowDelete(false);
+        setSelectedUser(null);
+    }
+
+    const deleteUserClickHandler = async (e) => {
+        e.preventDefault();
+
+        if (!selectedUser) return;
+        
+        const response = await UserService.delete(selectedUser);
+
+        if (response.ok) {
+            console.log(`User ${selectedUser.firstName} ${selectedUser.lastName} deleted.`);
+            setShowDelete(false);
+        } else {
+            console.error('Failed to delete the user.');
+        }
+
+        window.location.reload();
+    }
+
+    const openDetailsUserClickHandler = (e) => {
+        setShowDetails(true);
+        setSelectedUser({ _id: props._id, 
+                        firstName: props.firstName, 
+                        lastName: props.lastName, 
+                        email: props.email, 
+                        phoneNumber: props.phoneNumber, 
+                        createdAt: props.createdAt,
+                        updatedAt: props.updatedAt,
+                        country: props.country,
+                        city: props.city,
+                        street: props.street,
+                        streetNumber: props.streetNumber
+        });
+    }
+
+    const closeDetailsUserClickHandler = () => {
+        setShowDetails(false);
+        setSelectedUser(null);
+    }
+
     return (
         <>
+            {showDelete && <DeleteUserComponent
+                onClose={closeDeleteUserClickHandler}
+                onDelete={deleteUserClickHandler}
+            />}
+
+            {showDetails && <UserDetailsComponent 
+                onClose={closeDetailsUserClickHandler}
+                user={selectedUser}
+            />}
+
             <tr>
                 <td>
                     <img src={props.imageUrl}
@@ -25,7 +102,7 @@ function UserListItem(props) {
                         </path>
                     </svg>
                     </button>
-                    <button className="btn delete-btn" title="Delete">
+                    <button className="btn delete-btn" title="Delete" onClick={openDeleteUserClickHandler}>
                     <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash"
                         className="svg-inline--fa fa-trash" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 498 512">
                         <path fill="currentColor"
@@ -33,7 +110,7 @@ function UserListItem(props) {
                         </path>
                     </svg>
                     </button>
-                    <button className="btn info-btn" title="Info">
+                    <button className="btn info-btn" title="Info" onClick={openDetailsUserClickHandler}>
                     <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="info"
                         className="svg-inline--fa fa-info" role="img" xmlns="http://www.w3.org/2000/svg"
                         viewBox="-150 0 512 612">
