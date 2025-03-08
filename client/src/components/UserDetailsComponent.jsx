@@ -37,8 +37,8 @@ function UserDetailsComponent({onClose, user}) {
                             <strong> {user.country}, {user.city}, {user.street} {user.streetNumber} </strong>
                         </p>
 
-                        <p>Created on: <strong>Wednesday, June 28, 2022</strong></p>
-                        <p>Modified on: <strong>Thursday, June 29, 2022</strong></p>
+                        <p>Created on: <strong>{user.createdAt}</strong></p>
+                        <p>Modified on: <strong>{user.updatedAt}</strong></p>
                         </div>
                     </div>
                     </div>
